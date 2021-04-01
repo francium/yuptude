@@ -1,11 +1,7 @@
-# [yuptude](http://www.yuptude.com)
+My fork of yuptude (https://github.com/Pepck/yuptude), adding some features that I wanted.
 
-yuptude is a tiny bookmarklet that you can use to speed up or slow down HTML5 videos in your browser.  When activated, yuptude adds a small control panel that you can use to manually adjust the playbackRate for all videos on the current page.
-
-It works on many popular sites across the web: Vimeo, Netflix, YouTube, Ted, Facebook, and many many others.  Use it to watch presentations in a fraction of the time or experiment to find other amusing applications.
-
-And if you discover something fun or useful, share it with me at [@saypepck](https://www.twitter.com/saypepck) on Twitter.
-
-## building yuptude
-
-yuptude uses the [bookmarklet NodeJS module from mrcoles](https://github.com/mrcoles/bookmarklet) to package itself for use as a bookmark.
+I'm pretty happy quickly using https://chriszarate.github.io/bookmarkleter/ to make the .js files into draggable bookmarklets.
+I enable:
+* URL-encode reserved characters: [space], %, ", <, >, #, @, &, ?
+* Wrap in an IIFE (anonymizing function).
+* Minify code using Babel Minify. 
