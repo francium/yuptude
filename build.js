@@ -12,18 +12,20 @@ async function main() {
     mkdir('dist/src');
 
     const variants = [
-        ['tl', 'top left'],
-        ['tr', 'top right'],
-        ['bl', 'bottom left'],
-        ['br', 'bottom right'],
+        'tl',
+        'tc',
+        'tr',
+        'bl',
+        'bc',
+        'br',
     ];
 
     let template = readFile('index.template.md').toString();
 
     for (const variant of variants) {
-        const variantSrc = readFile('src/yuptude.js').toString().replace('__ypt_position__', variant[1]);
+        const variantSrc = readFile('src/yuptude.js').toString().replace('__yup_position__', variant);
         const compiledBookmarkletSrc = await bookmarklet.convert(variantSrc, {});
-        template = template.replace(`{{${variant[0]}}}`, compiledBookmarkletSrc);
+        template = template.replace(`{{${variant}}}`, compiledBookmarkletSrc);
     }
     console.log('Compiled bookmarklet');
 

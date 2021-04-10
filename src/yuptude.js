@@ -1,284 +1,596 @@
 const styles = `
-<style id="yptd-style">
-    #yptd {
-        user-select: none;
+<style id="yup-style">
+    :root {
+        --yup-2light-gray: #303030;
+        --yup-light-gray: #909090;
+        --yup-dark-gray: #202020;
+        --yup-text: #f9f9f9;
+        --yup-size: 25px;
+        --yup-container-padding: 2px;
+        --yup-cell-padding: 4px;
+        --yup-slider-height: 20px;
+        --yup-slider-width: 12px;
     }
-    #yptd span,
-    #yptd-box {
-        float: left;
-        padding: 0 0.5em;
-        display: block;
+
+    .yup-flex-align-center {
+        display: flex;
+        align-items: center;
     }
-    #yptd span em,
-    #yptd-bottom,
-    #yptd-in {
-        vertical-align: middle;
+
+    .yup-flex-row {
+        display: flex;
+        flex-direction: row;
     }
-    #yptd-pit,
-    #yptd-pit input {
-        float: right;
-    }
-    #yptd a,
-    #yptd-bar {
-        background-color: #fd0d5d;
-    }
-    #yptd {
-        z-index: 9999999999;
+
+    #yup-container {
+        font-size: 16px;
+        color: var(--yup-text);
+        z-index: 9999;
         position: fixed;
-        bottom: 0;
-        left: 6px;
-        font: 16px Helvetica, Arial, sans-serif;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
+        display: flex;
+        flex-direction: column;
+        width: min-content;
+
+        background: var(--yup-dark-gray);
+        border: 1px solid var(--yup-light-gray);
+        border-radius: 0;
+        font-family: sans-serif;
+        padding: var(--yup-container-padding);
     }
-    #yptd * {
-        margin: 0;
+
+    #yup-options-container {
+        position: relative;
     }
-    #yptd a {
-        border-radius: 5px;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        float: left;
-        margin: 0 0.5em 0 0;
-        padding: 0.25em 1em;
-        font-weight: 700;
-        color: #fff;
+
+    #yup-main-options {
+
     }
-    #yptd a em {
-        font-size: 0.9em;
+
+    #yup-secondary-options {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: var(--yup-dark-gray);
     }
-    #yptd a:active,
-    #yptd a:focus,
-    #yptd a:hover {
-        outline: 0;
-        color: #fd0d5d;
-        background-color: #fff;
-        text-decoration: none;
+
+    .yup-text-small {
+        font-size: 80%;
     }
-    #yptd span {
-        border-radius: 3px;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        margin: 0.5em;
-        width: 2.5em;
-        border-bottom: 2px solid rgba(0, 0, 0, 0.25);
-        text-decoration: none;
-        color: #000;
-        background-color: #fff;
-        cursor: pointer;
-        text-align: center;
+
+    .yup-row {
+        display: flex;
     }
-    #yptd span em {
-        font-size: 0.75em;
+
+    .yup-col-1 {
+        height: var(--yup-size);
+        width: var(--yup-size);
+        padding: var(--yup-cell-padding);
     }
-    #yptd span:active,
-    #yptd span:focus,
-    #yptd span:hover {
-        color: #fd0d5d;
+
+    .yup-col-2 {
+        height: var(--yup-size);
+        width: calc(2 * var(--yup-size));
+        padding: var(--yup-cell-padding) calc(2 * var(--yup-cell-padding));
     }
-    #yptd-bar {
-        border-radius: 3px 3px 0 0;
-        -moz-border-radius: 3px 3px 0 0;
-        -webkit-border-radius: 3px 3px 0 0;
-        height: 2.25em;
+
+    .yup-col-3 {
+        height: var(--yup-size);
+        width: calc(3 * var(--yup-size));
+        padding: var(--yup-cell-padding) calc(3 * var(--yup-cell-padding));
     }
-    #yptd-bar:after,
-    #yptd-bottom:after {
-        content: "";
-        display: block;
-        clear: both;
-    }
-    #yptd-controls {
-        float: right;
-        height: 2.25em;
-        border-left: 2px solid rgba(0, 0, 0, 0.33);
-    }
-    #yptd-box {
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        width: 4em;
-        min-width: 4em;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.15);
-    }
-    #yptd-in {
+
+    .yup-span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 100%;
-        border: 0;
-        text-align: center;
-        font: 14px Helvetica, Arial, sans-serif;
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color: #fff;
-        background-color: transparent;
+        color: rgb(240, 240, 240);
     }
-    #yptd-bottom {
-        padding: 0.75em;
-        font-size: 0.75em;
-        background-color: rgba(0, 0, 0, 0.8);
+
+    .yup-button, .yup-input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
     }
-    #yptd-pit {
-        position: relative;
-        padding: 0.25em 0;
+
+    .yup-button {
+        cursor: pointer;
+
+        border: none;
+        border-radius: 2px;
+        font-weight: bold;
+        color: var(--yup-text);
+        background: none;
     }
-    #yptd-pit label {
-        margin-right: 0.5em;
-        color: #fff;
+    .yup-button:hover {
+        background: var(--yup-2light-gray);
     }
-    #yptd-pit em {
+    .yup-button:active {
+        background: var(--yup-light-gray);
+    }
+
+    #yup-container a {
+        color: var(--yup-light-gray);
+    }
+
+    #yup-input-slider-container::before {
+        content: '';
+        background: var(--yup-text);
+        width: calc(3 * var(--yup-size));
+        height: 2px;
+        position: absolute;
+        z-index: -1;
+    }
+    .yup-range {
+        cursor: pointer;
+        height: var(--yup-slider-height);
+        -webkit-appearance: none;
+        background: none;
+        outline: none;
+        border-radius: 2px;
+    }
+    .yup-range::-moz-range-thumb,
+    .yup-range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: var(--yup-slider-height);
+        width: var(--yup-slider-width);
+        border-radius: 2px;
+        background: var(--yup-dark-gray);
+        cursor: pointer;
+        border: 3px solid var(--yup-text);
+    }
+    .yup-range:hover::-moz-range-thumb,
+    .yup-range:hover::-webkit-slider-thumb {
+        background: var(--yup-2light-gray);
+    }
+
+    /*************************************************************************/
+
+    .yup-button-minimize {
+        height: 12px;
+        justify-content: center;
+        align-items: center; */
+    }
+    .yup-button-minimize:hover {
+        background: var(--yup-2light-gray);
+    }
+    .yup-button-minimize:active {
+        background: var(--yup-light-gray);
+    }
+
+    .yup-top-left #yup-button-minimize-top,
+    .yup-top-center #yup-button-minimize-top,
+    .yup-top-right #yup-button-minimize-top {
         display: none;
     }
-    #yptd-pit:active em,
-    #yptd-pit:focus em,
-    #yptd-pit:hover em {
-        display: block;
-        position: absolute;
-        top: -2.5em;
-        left: 0;
-        padding: 0.5em;
-        white-space: pre;
-        font-size: 0.8em;
-        background-color: #fd0d5d;
+
+    .yup-bottom-left #yup-button-minimize-bottom,
+    .yup-bottom-center #yup-button-minimize-bottom,
+    .yup-bottom-right #yup-button-minimize-bottom {
+        display: none;
+    }
+
+    .yup-minimized {
+        border-color: var(--yup-text) !important;
+        /*
+         * Make it easier to click on this, remove padding from the container
+         * element onto which this class is applied. Otherwise you accidently
+         * click on padding and nothing happens
+         */
+        padding: 0 !important;
+    }
+
+    .yup-top-left.yup-minimized,
+    .yup-top-center.yup-minimized,
+    .yup-top-right.yup-minimized {
+        top: calc(-2.6 * var(--yup-size));
+    }
+
+    .yup-bottom-left.yup-minimized,
+    .yup-bottom-center.yup-minimized,
+    .yup-bottom-right.yup-minimized {
+        bottom: calc(-2.6 * var(--yup-size));
+    }
+
+    /*************************************************************************/
+
+    .yup-top-left {
+        top: -1px;
+        left: -1px;
+    }
+    .yup-top-center {
+        top: -1px;
+        left: 50%;
+        transform: translate(-50%, -1px);
+    }
+    .yup-top-right {
+        top: -1px;
+        right: -1px;
+    }
+    .yup-bottom-left {
+        bottom: -1px;
+        left: -1px;
+    }
+    .yup-bottom-center {
+        bottom: -1px;
+        left: 50%;
+        transform: translate(-50%, 1px);
+    }
+    .yup-bottom-right {
+        bottom: -1px;
+        right: -1px;
     }
 </style>
 `;
 
 const html = `
-<div id="yptd">
-    <div id="yptd-bar">
-        <span id="yptd-off"><em>Hide</em></span>
-        <div id="yptd-controls">
-            <span id="yptd-dwn">-</span>
-            <div id="yptd-box"><input id="yptd-in" type="text" value="1.0" /></div>
-            <span id="yptd-up">+</span>
+<!--
+    Chould use css-grid to avoid duplicating the minimize for top and bottom,
+    but that would result in possible incompatibility with non-css-grid
+    supporting browsers
+-->
+<div id="yup-button-minimize-top" class="yup-button yup-button-minimize">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+    >
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M19 13H5v-2h14v2z" fill="var(--yup-text)" />
+    </svg>
+</div>
+
+<div id="yup-options-container">
+    <div id="yup-main-options">
+        <!-- row 1 -->
+        <div class="yup-row">
+            <div class="yup-col-1">
+                <button
+                    id="yup-button-current-speed"
+                    class="yup-button yup-current-speed"
+                    title="Reset speed"
+                >
+                    1.0
+                </button>
+            </div>
+            <div class="yup-col-1">
+                <button
+                    id="yup-button-decrease-speed"
+                    class="yup-button"
+                    title="Decrease speed"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        width="24"
+                    >
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M19 13H5v-2h14v2z" fill="var(--yup-text)" />
+                    </svg>
+                </button>
+            </div>
+            <div class="yup-col-1">
+                <button
+                    id="yup-button-increase-speed"
+                    class="yup-button"
+                    title="Increase speed"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        width="24"
+                    >
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="var(--yup-text)" />
+                    </svg>
+                </button>
+            </div>
+            <div class="yup-col-1">
+                <button
+                    id="yup-button-more"
+                    class="yup-button"
+                    title="More"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        width="24"
+                    >
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path
+                            d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                            fill="var(--yup-text)"
+                        />
+                    </svg>
+                </button>
+            </div>
         </div>
-    </div>
-    <div id="yptd-bottom">
-        <a href="http://yuptude.com" target="_blank"><em>yuptude</em></a>
-        <div id="yptd-pit">
-            <label for="yptd-pin"> Shift Pitch <em>(Firefox &amp; Safari only)</em></label><input type="checkbox" name="yptd-pin" id="yptd-pin" value="1" />
+        <!-- row 1 -->
+
+        <!-- row 2 -->
+        <div class="yup-row">
+            <div
+                id="yup-input-slider-container"
+                class="yup-col-3 yup-flex-align-center"
+                title="Change speed"
+            >
+                <input
+                    id="yup-input-speed"
+                    class="yup-input yup-range"
+                    type="range"
+                    value = "1"
+                    min="0.5"
+                    max="4"
+                    step="0.1"
+                />
+            </div>
+            <div class="yup-col-1">
+                <button
+                    id="yup-button-hide"
+                    class="yup-button"
+                    title="Hide"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                            fill="var(--yup-text)"
+                        />
+                    </svg>
+                </button>
+            </div>
         </div>
+        <!-- row 2 -->
     </div>
+
+    <div id="yup-secondary-options">
+        <!-- row 1 -->
+        <div class="yup-row">
+            <div class="yup-col-3 yup-text-small yup-flex-row yup-flex-align-center">
+                <input type="checkbox" />
+                <label title="Firefox and Safari only">Pitch*</label>
+            </div>
+            <div class="yup-col-1">
+                <button
+                    id="yup-button-back"
+                    class="yup-button"
+                    title="Back"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        enable-background="new 0 0 24 24"
+                        height="24" viewBox="0 0 24 24"
+                        width="24"
+                    >
+                        <rect fill="none" height="24" width="24" />
+                        <g>
+                            <polygon
+                                points="17.77,3.77 16,2 6,12 16,22 17.77,20.23 9.54,12"
+                                fill="var(--yup-text)"
+                            />
+                        </g>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- row 1 -->
+
+        <!-- row 2 -->
+        <div class="yup-row yup-text-small yup-flex-align-center">
+            <div class="yup-col-3">
+                <a href="https://github.com/francium/yuptude">
+                    yuptude
+                </a>
+            </div>
+        </div>
+        <!-- row 2 -->
+    </div>
+</div>
+
+<!--
+    Chould use css-grid to avoid duplicating the minimize for top and bottom,
+    but that would result in possible incompatibility with non-css-grid
+    supporting browsers
+-->
+<div id="yup-button-minimize-bottom" class="yup-button yup-button-minimize">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+    >
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M19 13H5v-2h14v2z" fill="var(--yup-text)" />
+    </svg>
 </div>
 `;
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-if ($('#yptd') !== null) {
-    console.log('yuptude\'s already running!');
-    // return; -------------------------------------------------------- TODO
-}
-const ypt_position = '__ypt_position__';
-console.log('Starting yuptude!', ypt_position);
+const REPO_URL = 'https://github.com/francium/yuptude';
 
-/** Videos on the page */
-let videos;
-
-/** Individual video element */
-let v;
-
-/** Speed value from manual input field */
-let inputval;
-
-/** Container for yuptude widget */
-let ytw_el = document.createElement('div');
-ytw_el.innerHTML = `${styles}${html}`;
-document.body.appendChild(ytw_el);
-
-const yti_in = $('#yptd-in');
-const yti_off = $('#yptd-off');
-const yti_pit = $('#yptd-pin');
-const yti_up = $('#yptd-up');
-const yti_dwn = $('#yptd-dwn');
-
-// Speed at which to play
-let s = window.sessionStorage.getItem('yuptudeSpeed');
-if (s === null) {
-    s = 1.0;
-} else {
-    console.log('Recovered speed ' + s);
-    $('#yptd-in').value = s;
+/** Enum of magic positions that are known by the build system */
+const MAGIC_POSITION = {
+    TL: 'tl',
+    TC: 'tc',
+    TR: 'tr',
+    BL: 'bl',
+    BC: 'bc',
+    BR: 'br',
 }
 
-// Pitch shifting off/on
-let p = window.sessionStorage.getItem('yuptudePitch');
-if (p === null) {
-    p = false;
-} else {
-    console.log('Recovered pitch ' + p);
-    $('#yptd-pin').checked = p;
+const POSITION_CLASS_VARIANTS = {
+    [MAGIC_POSITION.TL]: 'yup-top-left',
+    [MAGIC_POSITION.TC]: 'yup-top-center',
+    [MAGIC_POSITION.TR]: 'yup-top-right',
+    [MAGIC_POSITION.BL]: 'yup-bottom-left',
+    [MAGIC_POSITION.BC]: 'yup-bottom-center',
+    [MAGIC_POSITION.BR]: 'yup-bottom-right',
+};
+
+const STORE_KEY_SPEED = 'yup-speed';
+const STORE_KEY_PITCH = 'yup-pitch';
+
+const SELECTOR = {
+    CONTAINER: null,
+    BUTTON: {
+        CURRENT_SPEED: null,
+        HIDE: null,
+        INCREASE_SPEED: null,
+        DECREASE_SPEED: null,
+        MORE: null,
+        MINIMIZE: null,
+    },
+    INPUT: {
+        SPEED: null,
+    },
+};
+
+const EVENT_SPEED_CHANGE = 'yup-speed-change';
+
+const INTERVAL_PERIOD_MS = 250;
+
+const SPEED_DEFAULT = 1.0;
+const SPEED_MIN = 0.5;
+const SPEED_MAX = 4.0;
+const SPEED_STEP = 0.1;
+
+const SETTINGS = {
+    speed: SPEED_DEFAULT,
+    shift_pitch: false,
 }
 
-// Update the speed variable when the input field changes
-yti_in.addEventListener('input', yte_in);
-function yte_in() {
-    s = $('#yptd-in').value;
-    window.sessionStorage.setItem('yuptudeSpeed', s);
+function main() {
+    create_container_element();
+    init_selectors();
+    init_event_handlers();
+    init_settings_application_loop();
 }
 
-// Unload yuptude
-yti_off.addEventListener('click', yte_off);
-function yte_off() {
-    yti_in.removeEventListener('input', yte_in);
-    yti_off.removeEventListener('click', yte_off);
-    yti_pit.removeEventListener('click', yte_pit);
-    yti_up.removeEventListener('click', yte_up);
-    yti_dwn.removeEventListener('click', yte_dwn);
+/**
+ * Initialize and create the element that contains the entire widget
+ */
+function create_container_element() {
+    const container_el = document.createElement('div');
+    container_el.innerHTML = `${styles}${html}`;
+    document.body.appendChild(container_el);
+    container_el.id = 'yup-container';
 
-    const ytw = $('#yptd');
-    ytw.parentNode.removeChild(ytw);
-    const yts = $('#yptd-style');
-    yts.parentNode.removeChild(yts);
+    // This is a special placeholder magic string that will get rewritten by
+    // the build script
+    const yup_position = '__yup_position__';
+    container_el.classList.add(POSITION_CLASS_VARIANTS[yup_position]);
 
-    clearInterval(interval);
-
-    //Don't reset speed on close.
+    SELECTOR.CONTAINER = container_el;
 }
 
-// Toggle pitch-shifting
-yti_pit.addEventListener('click', yte_pit);
-function yte_pit() {
-    p = $('#yptd-pin').checked;
-    window.sessionStorage.setItem('yuptudePitch', p);
+function init_selectors() {
+    SELECTOR.BUTTON.CURRENT_SPEED = $('#yup-button-current-speed');
+    SELECTOR.INPUT.SPEED = $('#yup-input-speed');
+    SELECTOR.BUTTON.HIDE = $('#yup-button-hide');
+    SELECTOR.BUTTON.INCREASE_SPEED = $('#yup-button-increase-speed');
+    SELECTOR.BUTTON.DECREASE_SPEED = $('#yup-button-decrease-speed');
+    SELECTOR.BUTTON.MORE = $('#yup-button-more');
+    SELECTOR.BUTTON.MINIMIZE_TOP = $('#yup-button-minimize-top');
+    SELECTOR.BUTTON.MINIMIZE_BOTTOM = $('#yup-button-minimize-bottom');
 }
 
-// Increase video playback speed up to the standard cutoff of 4.0
-yti_up.addEventListener('click', yte_up);
-function yte_up() {
-    inputval = document.getElementById('yptd-in').value;
-    inputval = inputval ? parseFloat(inputval) : 1;
-    inputval = (inputval <= 3.9 ? inputval + 0.1 : inputval);
+function init_event_handlers() {
+    document.addEventListener(EVENT_SPEED_CHANGE, e => {
+        SELECTOR.BUTTON.CURRENT_SPEED.innerText = +e.yup_speed.toFixed(2);
+        SELECTOR.INPUT.SPEED.value = +e.yup_speed.toFixed(2);
+    });
 
-    s = $('#yptd-in').value = inputval.toFixed(1);
-    window.sessionStorage.setItem('yuptudeSpeed', s);
+    SELECTOR.BUTTON.CURRENT_SPEED.addEventListener('click', () => {
+        SETTINGS.speed = SPEED_DEFAULT;
+        const e = new Event(EVENT_SPEED_CHANGE)
+        e.yup_speed = SETTINGS.speed;
+        document.dispatchEvent(e);
+    });
+
+    SELECTOR.BUTTON.DECREASE_SPEED.addEventListener('click', () => {
+        SETTINGS.speed -= SPEED_STEP;
+        SETTINGS.speed = Math.min(SPEED_MAX, Math.max(SPEED_MIN, SETTINGS.speed));
+        const e = new Event(EVENT_SPEED_CHANGE)
+        e.yup_speed = SETTINGS.speed;
+        document.dispatchEvent(e);
+    });
+
+    SELECTOR.BUTTON.INCREASE_SPEED.addEventListener('click', () => {
+        SETTINGS.speed += SPEED_STEP;
+        SETTINGS.speed = Math.min(SPEED_MAX, Math.max(SPEED_MIN, SETTINGS.speed));
+        const e = new Event(EVENT_SPEED_CHANGE)
+        e.yup_speed = SETTINGS.speed;
+        document.dispatchEvent(e);
+    });
+
+    SELECTOR.INPUT.SPEED.addEventListener('input', () => {
+        SETTINGS.speed = SELECTOR.INPUT.SPEED.value;
+        SETTINGS.speed = Math.min(SPEED_MAX, Math.max(SPEED_MIN, SETTINGS.speed));
+        const e = new Event(EVENT_SPEED_CHANGE)
+        e.yup_speed = SETTINGS.speed;
+        document.dispatchEvent(e);
+    });
+
+    SELECTOR.BUTTON.HIDE.addEventListener('click', () => {
+        SELECTOR.CONTAINER.style.display = 'none';
+    });
+
+    SELECTOR.BUTTON.MORE.addEventListener('click', () => {
+        alert(`Not implemented yet. Please visit ${REPO_URL}`);
+    });
+
+    SELECTOR.BUTTON.MINIMIZE_TOP.addEventListener('click', () => {
+        SELECTOR.CONTAINER.classList.toggle('yup-minimized');
+    });
+    SELECTOR.BUTTON.MINIMIZE_BOTTOM.addEventListener('click', () => {
+        SELECTOR.CONTAINER.classList.toggle('yup-minimized');
+    });
 }
 
-// Decrease video playback speed down to the standard cutoff of 0.5
-yti_dwn.addEventListener('click', yte_dwn);
-function yte_dwn() {
-    inputval = $('#yptd-in').value;
-    inputval = inputval ? parseFloat(inputval) : 1;
-    inputval = (inputval >= 0.6 ? inputval - 0.1 : inputval);
-
-    s = $('#yptd-in').value = inputval.toFixed(1);
-    window.sessionStorage.setItem('yuptudeSpeed', s);
+/**
+ * Initialize loop that continuously re-applies video playback speed and
+ * pitch setting to every video on the page
+ *
+ * This is to catch any videos that get added to the page after
+ * initialization.
+ *
+ * @returns {number} DOM interval loop id for future clean up or to stop loop
+ */
+function init_settings_application_loop() {
+    return setInterval(
+        () => apply_settings_to_all_videos(),
+        INTERVAL_PERIOD_MS,
+    );
 }
 
-// Apply speed & pitch changes with a running internal to catch videos that are
-// appended to the page or loaded after yuptude starts.
-let interval = setInterval(function() { ytp_apply() }, 100);
-
-function ytp_apply(ns) {
-    videos = $$('video');
+function apply_settings_to_all_videos() {
+    const videos = $$('video');
     for (const v of videos) {
-        if( v && v.readyState >= 2) {
-            v.playbackRate = (ns || (s || 1));
-            v.mozPreservesPitch = v.webkitPreservesPitch = v.preservePitch = !p;
-        }
+        if(!v || v.readyState < 2) { continue; }
+
+        v.playbackRate = (SETTINGS.speed || 1);
+
+        v.mozPreservesPitch = !SETTINGS.shift_pitch;
+        v.webkitPreservesPitch = !SETTINGS.shift_pitch;
+        v.preservePitch = !SETTINGS.shift_pitch;
     }
+}
+
+const c = $('#yup-container');
+if (c !== null) {
+   c.style.display = 'block';
+} else {
+    main();
 }
