@@ -1,0 +1,22 @@
+{
+  "name": "yuptude",
+  "version": "2.0.0",
+  "description": "Video playback speed control bookmarklet",
+  "main": "yuptude.js",
+  "scripts": {
+    "build": "./build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/francium/yuptude.git"
+  },
+  "author": "Pepck, SteveOnorato, francium",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/francium/yuptude/issues"
+  },
+  "homepage": "https://github.com/francium/yuptude#readme",
+  "devDependencies": {
+    "bookmarklet": "^3.0.0"
+  }
+}
