@@ -1,5 +1,3 @@
-<!-- SCRIPT GENERATED, DO NO EDIT DIRECTLY -->
-
 # yuptude
 
 [Bookmarklet][bookmarklet] for controlling video playback speed.
@@ -14,6 +12,11 @@ Visit https://francium.github.io/yuptude/
 
 
 ## Changelog
+
+
+### 2.0.0
+
+- Fix styling to prevent selection of text on UI controls
 
 
 ### 1.1.0
