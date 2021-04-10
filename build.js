@@ -18,19 +18,19 @@ async function main() {
         ['br', 'bottom right'],
     ];
 
-    let readme = readFile('README.template.md').toString();
+    let template = readFile('index.template.md').toString();
 
     for (const variant of variants) {
         const variantSrc = readFile('src/yuptude.js').toString().replace('__ypt_position__', variant[1]);
         const compiledBookmarkletSrc = await bookmarklet.convert(variantSrc, {});
-        readme = readme.replace(`{{${variant[0]}}}`, compiledBookmarkletSrc);
+        template = template.replace(`{{${variant[0]}}}`, compiledBookmarkletSrc);
     }
     console.log('Compiled bookmarklet');
 
-    readme = `<!-- SCRIPT GENERATED, DO NO EDIT DIRECTLY -->\n\n` + readme;
+    template = `<!-- SCRIPT GENERATED, DO NO EDIT DIRECTLY -->\n\n` + template;
 
-    writeFile('README.md', readme);
-    console.log('Updated README.md');
+    writeFile('index.md', template);
+    console.log('Updated index.md');
     console.log('Done');
 }
 
