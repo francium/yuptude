@@ -6,7 +6,7 @@
 [bookmarklet]: https://en.wikipedia.org/wiki/Bookmarklet
 
 
-## Install: Choose and bookmark you preferred version(s)
+## Install: Choose and bookmark your preferred version(s)
 You can either right click and bookmark or drag them to you bookmark toolbar.
 
 <ul>
